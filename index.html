@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <br>
+    <select id="dropdown">
+    </select>
+    <label for="dropdown">Nose Type</label>
+    <br>
+    <input id="nosePram" type="range" id="range" min="0" max="1" value=".5" step=".01">
+    <label for="range">Pram</label>
+    <script type="module" src="/src/main.ts"></script>
+</body>
+<style>
+    html {
+        width: 100vw;
+        height: 100vh;
+        margin: 0px;
+    }
+
+    body {
+        padding: 5px;
+    }
+
+    canvas {
+        border: 1px solid #000;
+        width: 500px;
+        height: 500px;
+    }
+</style>
+
+</html>

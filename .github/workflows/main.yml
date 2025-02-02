@@ -1,0 +1,36 @@
+name: Build To Branch
+
+on:
+  workflow_dispatch: # Trigger the workflow manually
+  push:
+    branches:
+      - master # Trigger the workflow when pushing to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Specify your preferred Node.js version
+
+      # Install dependencies and build the app
+      - name: Install dependencies and build
+        run: |
+          npm ci
+          npm run build
+
+      # Deploy to gh-pages branch
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # Directory where Vite outputs the build files
+          destination_branch: gh-pages # Target branch for deployment
