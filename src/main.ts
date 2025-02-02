@@ -9,6 +9,8 @@ canvas.height = 500;
 
 const dropDown = document.getElementById('dropdown') as HTMLSelectElement;
 const pram = document.getElementById('nosePram') as HTMLInputElement;
+const lengthInput = document.getElementById('noseLength') as HTMLInputElement;
+const radiusInput = document.getElementById('noseRadius') as HTMLInputElement;
 
 // create a new dropdown select element for the nose shape
 for (let i = 0; i < Object.values(Shapes.Shapes).length; i++) {
@@ -37,6 +39,14 @@ pram.addEventListener('input', function () {
     UpdateDrawing();
 })
 
+lengthInput.addEventListener('input', function () {
+    UpdateDrawing();
+})
+
+radiusInput.addEventListener('input', function () {
+    UpdateDrawing();
+})
+
 function UpdateDrawing()
 {
 
@@ -55,23 +65,17 @@ function UpdateDrawing()
     let param = parseFloat(pram.value);
 
     // length of the nose cone
-    let length = 200;
+    let length = parseInt(lengthInput.value);
 
     // radius of the nose cone
-    let radius = 50;
-
-    // draw small red circle at the origin
-    ctx.fillStyle = 'red';
-    ctx.beginPath();
-    ctx.arc(0, 0, 2, 0, 2 * Math.PI);
-    ctx.fill();
+    let radius = parseInt(radiusInput.value);
 
     // draw the shape
     ctx.strokeStyle = 'black';
     ctx.beginPath();
     for (let x = 0; x <= length; x += 1) {
         let r = shape.getRadius(x, radius, length, param);
-        ctx.lineTo(x, -r);
+        ctx.lineTo(x - (length / 2), -r);
     }
     ctx.stroke();
 
@@ -80,9 +84,26 @@ function UpdateDrawing()
     ctx.beginPath();
     for (let x = 0; x <= length; x += 1) {
         let r = shape.getRadius(x, radius, length, param);
-        ctx.lineTo(x, r);
+        ctx.lineTo(x - (length / 2), r);
     }
     ctx.stroke();
-    ctx.restore();
+    
+    // close the end of the nose cone
+    ctx.strokeStyle = 'black';
+    ctx.beginPath();
+    ctx.moveTo(length / 2, radius);
+    ctx.lineTo(length / 2, -radius);
+    ctx.stroke();
+    
+    // draw dotted lines though the center
+    ctx.strokeStyle = 'red';
+    ctx.setLineDash([5, 5]);
+    ctx.beginPath();
+    ctx.moveTo((length / 2) + 10, 0);
+    ctx.lineTo((-length / 2) - 10, 0);
+    ctx.stroke();
 
+    ctx.restore();
+    
 }
+UpdateDrawing();

@@ -17,6 +17,12 @@
     <br>
     <input id="nosePram" type="range" id="range" min="0" max="1" value=".5" step=".01">
     <label for="range">Pram</label>
+    <br>
+    <input id="noseLength" type="range" id="range" min="10" max="400" value="200" step=".01">
+    <label for="range">Length</label>
+    <br>
+    <input id="noseRadius" type="range" id="range" min="10" max="200" value="50" step=".01">
+    <label for="range">Radius</label>
     <script type="module" src="/src/main.ts"></script>
 </body>
 <style>
@@ -24,6 +30,10 @@
         width: 100vw;
         height: 100vh;
         margin: 0px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     body {
