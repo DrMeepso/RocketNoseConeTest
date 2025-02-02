@@ -99,8 +99,16 @@ function UpdateDrawing()
     ctx.strokeStyle = 'red';
     ctx.setLineDash([5, 5]);
     ctx.beginPath();
-    ctx.moveTo((length / 2) + 10, 0);
-    ctx.lineTo((-length / 2) - 10, 0);
+    ctx.moveTo((length / 2), 0);
+    ctx.lineTo((-length / 2), 0);
+    ctx.stroke();
+
+    // draw dotted lines though the center
+    ctx.strokeStyle = 'green';
+    ctx.setLineDash([5, 5]);
+    ctx.beginPath();
+    ctx.moveTo(-length / 2, 0);
+    ctx.lineTo(-length / 2, -radius);
     ctx.stroke();
 
     ctx.restore();
